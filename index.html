@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Guru Sai Laser - Quality Prints & Custom Signs</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="favicon" href="assets/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Fixed Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/sgslogosvg.svg" alt="Sri Guru Sai Laser" class="logo-svg">
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">Home</a>
+                </li>
+                 <li class="nav-item">
+                    <a href="#about" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#services" class="nav-link">Services</a>
+                </li>
+               
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact Us</a>
+                </li>
+            </ul>
+            <a href="#contact" class="cta-button">Get a Quote</a>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Quality Prints & Custom Signs Made for You</h1>
+                <p class="hero-description">From acrylic cutting and engraving to LED boards and digital prints, we make exactly what you need, with precision and reliability.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">Get a Quote</a>
+                    <a href="#services" class="btn-secondary">View Our Services</a>
+                </div>
+            </div>
+            <div class="hero-images">
+                <div class="hero-image hero-image-1"></div>
+                <div class="hero-image hero-image-2"></div>
+                <div class="hero-image hero-image-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Ticker -->
+    <div class="services-ticker">
+        <div class="ticker-content">
+            <span class="ticker-item">Laser Cutting & Engraving</span>
+            <span class="ticker-star">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </span>
+            <span class="ticker-item">House Name Plates</span>
+            <span class="ticker-star">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </span>
+            <span class="ticker-item">LED Sign Boards</span>
+            <span class="ticker-star">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </span>
+            <span class="ticker-item">Rubber Stamps</span>
+            <span class="ticker-star">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </span>
+            <span class="ticker-item">Digital Prints</span>
+            <span class="ticker-star">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </span>
+            <span class="ticker-item">Fabric Banners</span>
+            <span class="ticker-star">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </span>
+            <span class="ticker-item">Mug Printing</span>
+            <span class="ticker-star">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </span>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <p class="about-text">At Sri Guru Sai Laser, we specialize in delivering reliable printing and custom sign solutions that help individuals and businesses make a lasting impression. From acrylic cutting and engraving to LED boards and digital prints, we focus on turning your requirements into reality with accuracy and care.</p>
+                <p class="about-text">Our commitment to quality, timely delivery, and customer satisfaction has made us a trusted choice across Bengaluru. Whether it's for your home, shop, or business, we ensure every product is crafted to meet your needs.</p>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">7+</div>
+                    <div class="stat-label">Years of Trusted Service</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Projects completed Successfully</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Happy Customers Across Bangalore</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">From custom prints to LED boards and engraving, we offer a wide range of solutions to meet your personal and business needs.</p>
+                        <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image service-image-1"></div>
+                    <div class="service-content">
+                        <h3 class="service-title">House Name Plates</h3>
+                        <p class="service-description">Custom name plates made from acrylic, titanium, or stainless steel for homes and offices.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-content">
+                        <h3 class="service-title">Rubber Stamps</h3>
+                        <p class="service-description">Personalized rubber stamps designed for clear, long-lasting impressions, perfect for offices, businesses, and personal use.</p>
+                    </div>
+                    <div class="service-image service-image-2"></div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image service-image-3"></div>
+                    <div class="service-content">
+                        <h3 class="service-title">Fabric Banner</h3>
+                        <p class="service-description">High-quality fabric banners that are durable, lightweight, and ideal for promotions, events, and displays.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-content">
+                        <h3 class="service-title">LED Sign Boards</h3>
+                        <p class="service-description">Bright and durable LED sign boards designed to grab attention and showcase your brand, day or night.</p>
+                    </div>
+                    <div class="service-image service-image-4"></div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image service-image-5"></div>
+                    <div class="service-content">
+                        <h3 class="service-title">Digital Prints</h3>
+                        <p class="service-description">Sharp, vibrant digital prints suited for posters, flyers, brochures, and all your everyday printing needs.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-content">
+                        <h3 class="service-title">Mug Printing</h3>
+                        <p class="service-description">Custom-printed mugs with your design, logo, or message, perfect for gifts, events, or branding.</p>
+                    </div>
+                    <div class="service-image service-image-6"></div>
+                </div>
+            </div>
+
+            <div class="load-more-container">
+                <button class="load-more-btn">Load More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
+        <div class="container">
+            <h2 class="section-title">Here's Why People Choose Us</h2>
+            <div class="why-choose-content">
+                <div class="why-choose-image"></div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon feature-icon-1"><i class="fas fa-star"></i></div>
+                        <h3 class="feature-title">Quality You Can See</h3>
+                        <p class="feature-description">Every product is made with precision using durable materials for a long-lasting finish.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon feature-icon-2"><i class="fas fa-truck"></i></div>
+                        <h3 class="feature-title">On-Time Delivery</h3>
+                        <p class="feature-description">We understand deadlines matter, which is why every order is completed and delivered right when you need it.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon feature-icon-3"><i class="fas fa-dollar-sign"></i></div>
+                        <h3 class="feature-title">Affordable Solutions</h3>
+                        <p class="feature-description">High-quality prints and signs don't have to be expensive; we provide reliable products at prices that work for you.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon feature-icon-4"><i class="fas fa-award"></i></div>
+                        <h3 class="feature-title">Experience You Can Trust</h3>
+                        <p class="feature-description">With 6+ years in the industry and hundreds of projects completed, we know how to get it right.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Ticker Bottom -->
+    <div class="services-ticker">
+        <div class="ticker-content">
+            <span class="ticker-item">Laser Cutting & Engraving</span>
+            <span class="ticker-star">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </span>
+            <span class="ticker-item">House Name Plates</span>
+            <span class="ticker-star">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </span>
+            <span class="ticker-item">LED Sign Boards</span>
+            <span class="ticker-star">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </span>
+            <span class="ticker-item">Rubber Stamps</span>
+            <span class="ticker-star">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </span>
+            <span class="ticker-item">Digital Prints</span>
+            <span class="ticker-star">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </span>
+            <span class="ticker-item">Fabric Banners</span>
+            <span class="ticker-star">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </span>
+            <span class="ticker-item">Mug Printing</span>
+            <span class="ticker-star">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </span>
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Work Gallery</h2>
+                <p>Explore our portfolio of quality laser cutting and printing services</p>
+            </div>
+            <div class="gallery-container">
+                <div class="gallery-slider">
+                    <div class="gallery-slide active">
+                        <img src="assets/WhatsApp Image 2025-09-10 at 23.04.21_1cda9dd7.jpg" alt="Gallery Image 1">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="assets/WhatsApp Image 2025-09-10 at 23.04.21_78073f91.jpg" alt="Gallery Image 2">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="assets/WhatsApp Image 2025-09-10 at 23.04.21_fad461b8.jpg" alt="Gallery Image 3">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="assets/WhatsApp Image 2025-09-10 at 23.04.22_5b340a85.jpg" alt="Gallery Image 4">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="assets/WhatsApp Image 2025-09-10 at 23.04.23_39ff88ba.jpg" alt="Gallery Image 5">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="assets/WhatsApp Image 2025-09-10 at 23.04.23_9677587c.jpg" alt="Gallery Image 6">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="assets/WhatsApp Image 2025-09-10 at 23.04.27_12aa15ce.jpg" alt="Gallery Image 7">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="assets/WhatsApp Image 2025-09-10 at 23.04.28_68a66f3a.jpg" alt="Gallery Image 8">
+                    </div>
+                </div>
+                <button class="gallery-nav prev" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="gallery-nav next" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="gallery-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                    <span class="dot" data-slide="3"></span>
+                    <span class="dot" data-slide="4"></span>
+                    <span class="dot" data-slide="5"></span>
+                    <span class="dot" data-slide="6"></span>
+                    <span class="dot" data-slide="7"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-content">
+                <div class="contact-form-container">
+                    <form class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" placeholder="Full Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Your Email</label>
+                                <input type="email" id="email" name="email" placeholder="Email Address" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Enter Phone Number" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="service">Service Interested in</label>
+                                <select id="service" name="service" required>
+                                    <option value="">Select Service</option>
+                                    <option value="house-name-plates">House Name Plates</option>
+                                    <option value="rubber-stamps">Rubber Stamps</option>
+                                    <option value="led-sign-boards">LED Sign Boards</option>
+                                    <option value="digital-prints">Digital Prints</option>
+                                    <option value="fabric-banner">Fabric Banner</option>
+                                    <option value="mug-printing">Mug Printing</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" placeholder="Enter Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send Message ➤</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-section">
+                        <h3>Get In Touch</h3>
+                        <p>Have a question, need a quote, or just want to discuss your requirements? Call us, email us, or connect with us on WhatsApp, we're always ready to help.</p>
+                    </div>
+                    <div class="contact-section">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                            <div>
+                                <h4>Call Us</h4>
+                                <p>9844327471</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h4>Email Us</h4>
+                                <p>srigurusailaser@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <h4>Our Address</h4>
+                                <p><a href="https://maps.app.goo.gl/uEsAJgvhY2aRFrNN8?g_st=aw" target="_blank" class="address-link">#02 Narmada Layout, 2nd Cross Opp.gardn City University Parking, Kithiganur Main road, Bengaluru</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-section">
+                        <h4>Stay Connected With Us</h4>
+                        <div class="social-links">
+                            <a href="https://wa.me/919844327471?text=Hi%20Sri%20Guru%20Sai%20Laser!%20I%20am%20interested%20in%20your%20services.%20Please%20provide%20more%20details." class="social-link whatsapp-link" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="mailto:srigurusailaser@gmail.com?subject=Inquiry%20about%20your%20services&body=Hi%20Sri%20Guru%20Sai%20Laser,%0A%0AI%20am%20interested%20in%20your%20services.%20Please%20provide%20more%20details.%0A%0AThank%20you!" class="social-link email-link" title="Email"><i class="fas fa-envelope"></i></a>
+                            <a href="#" class="social-link instagram-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">   
+                        <p class="footer-logo">
+                            <img src="assets/sgslogopng.png" alt="Sri Guru Sai Laser" class="logo">
+                            Sri Guru Sai Laser</p>                   
+                    <p class="footer-description">Sri Guru Sai Laser — trusted for quality printing, custom signs, and personalized products since 2018.</p>
+                    <a href="#home" class="back-to-top" id="backToTop">
+                        <i class="fas fa-arrow-up"></i>
+                        Back to Top
+                    </a>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Get Quote</a></li>                        
+                    </ul>
+                    <div class="terms-links">
+                        <a href="terms.html">Terms & Conditions</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <div class="footer-contact">
+                        <p>9844327471</p>
+                        <p>srigurusailaser@gmail.com</p>
+                        <p><a href="https://maps.app.goo.gl/uEsAJgvhY2aRFrNN8?g_st=aw" target="_blank" class="address-link">#02 Narmada Layout, 2nd Cross Opp.gardn City University Parking, Kithiganur Main road, Bengaluru</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Copyright Footer -->
+    <div class="copyright-footer">
+        <div class="container">
+            <p>Copyright © 2025 <a href="https://cortexit.in" target="_blank" class="cortex-link">CORTEX™</a>. All Rights Reserved.</p>
+            <p>Designed and Developed by <a href="https://cortexit.in" target="_blank" class="cortex-link">CORTEX™</a></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
