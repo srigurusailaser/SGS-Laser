@@ -36,6 +36,7 @@ function updateActiveNavLink() {
 
 // Navbar Background Change on Scroll
 const navbar = document.getElementById('navbar');
+const backToTopBtn = document.getElementById('backToTop');
 
 function updateNavbarBackground() {
     if (window.scrollY > 50) {
@@ -51,6 +52,15 @@ function updateNavbarBackground() {
 window.addEventListener('scroll', () => {
     updateActiveNavLink();
     updateNavbarBackground();
+
+    // Toggle floating back-to-top visibility
+    if (backToTopBtn) {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    }
 });
 
 // Load More Services Functionality
@@ -118,22 +128,7 @@ loadMoreBtn.addEventListener('click', () => {
     loadMoreBtn.style.display = 'none';
 });
 
-// Add CSS for additional service images
-const additionalStyles = `
-    .service-image-7 {
-        background-color: #6936C0;
-    }
-    .service-image-8 {
-        background-color: #FFFFFF01;
-    }
-    .service-image-9 {
-        background-color: #00000080;
-    }
-`;
-
-const styleSheet = document.createElement('style');
-styleSheet.textContent = additionalStyles;
-document.head.appendChild(styleSheet);
+// No extra CSS injection needed for services now
 
 // Toast Notification Function
 function showToast(message, type = 'success') {
@@ -390,30 +385,7 @@ function initGSAPAnimations() {
         });
     });
 
-    // Hero section animation with scrub
-    gsap.timeline({
-        scrollTrigger: {
-            trigger: '.hero-content',
-            start: "top 130%",
-            end: "top 30%",
-            scrub: 0.5
-        }
-    })
-    .from('.hero-content h1', {
-        y: 30,
-        opacity: 0,
-        ease: "linear"
-    })
-    .from('.hero-content p', {
-        y: 20,
-        opacity: 0,
-        ease: "linear"
-    }, "-=0.7")
-    .from('.cta-button', {
-        y: 15,
-        opacity: 0,
-        ease: "linear"
-    }, "-=0.5");
+    // Removed hero scrub animation (it was fading content on slight scroll)
 
     // Service cards animation with scrub
     gsap.utils.toArray('.service-card').forEach((card, index) => {
@@ -528,8 +500,21 @@ function initSmoothScrolling() {
     });
 }
 
-// Back to top functionality - now uses standard anchor navigation to #home
-// No custom JavaScript needed as it uses href="#home"
+// Back to top functionality using GSAP ScrollTo
+if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (typeof gsap !== 'undefined' && gsap.plugins.ScrollToPlugin) {
+            gsap.to(window, {
+                duration: 1,
+                scrollTo: { y: 0 },
+                ease: "linear"
+            });
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    });
+}
 
 // Enhanced ticker animation with GSAP
 function initEnhancedTicker() {
@@ -619,84 +604,29 @@ function initMobileMenu() {
     }
 }
 
-// Gallery functionality
-let currentSlide = 0;
-const slides = document.querySelectorAll('.gallery-slide');
-const dots = document.querySelectorAll('.dot');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const totalSlides = slides.length;
+// Gallery tab functionality
+function initGalleryTabs() {
+    const tabs = document.querySelectorAll('.gallery-tab');
+    const grids = document.querySelectorAll('.gallery-grid');
 
-function showSlide(index) {
-    // Remove active class from all slides and dots
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    // Add active class to current slide and dot
-    if (slides[index]) {
-        slides[index].classList.add('active');
-    }
-    if (dots[index]) {
-        dots[index].classList.add('active');
-    }
-    
-    // Move slider
-    const slider = document.querySelector('.gallery-slider');
-    if (slider) {
-        slider.style.transform = `translateX(-${index * 100}%)`;
-    }
-}
+    if (!tabs.length || !grids.length) return;
 
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    showSlide(currentSlide);
-}
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.getAttribute('data-gallery');
 
-function prevSlide() {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    showSlide(currentSlide);
-}
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
 
-// Event listeners for navigation buttons
-if (nextBtn) {
-    nextBtn.addEventListener('click', nextSlide);
-}
-
-if (prevBtn) {
-    prevBtn.addEventListener('click', prevSlide);
-}
-
-// Event listeners for dots
-dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-        currentSlide = index;
-        showSlide(currentSlide);
+            grids.forEach(grid => {
+                if (grid.classList.contains(`gallery-grid-${target}`)) {
+                    grid.classList.add('active');
+                } else {
+                    grid.classList.remove('active');
+                }
+            });
+        });
     });
-});
-
-// Auto-slide functionality
-let autoSlideInterval;
-
-function startAutoSlide() {
-    autoSlideInterval = setInterval(nextSlide, 4000); // Change slide every 4 seconds
-}
-
-function stopAutoSlide() {
-    clearInterval(autoSlideInterval);
-}
-
-// Start auto-slide when page loads
-function initGallery() {
-    if (slides.length > 0) {
-        startAutoSlide();
-        
-        // Pause auto-slide on hover
-        const galleryContainer = document.querySelector('.gallery-container');
-        if (galleryContainer) {
-            galleryContainer.addEventListener('mouseenter', stopAutoSlide);
-            galleryContainer.addEventListener('mouseleave', startAutoSlide);
-        }
-    }
 }
 
 // Initialize when DOM is loaded
@@ -711,7 +641,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initEnhancedTicker();
     initCounters();
     initHoverEffects();
-    initGallery();
+    initGalleryTabs();
     
     // Initial call to set active nav link
     updateActiveNavLink();
