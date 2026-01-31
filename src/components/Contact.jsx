@@ -72,19 +72,20 @@ const Contact = () => {
         emailjs.send(
           "service_oxy7n08",
           "template_m49l2ga", // ADMIN_TEMPLATE_ID
-          templateParams
+          templateParams,
         ),
         emailjs.send(
           "service_oxy7n08",
           "template_dqrwz08", // AUTO_REPLY_TEMPLATE_ID
-          templateParams
-        )
+          templateParams, //error fixed
+        ),
       ]);
 
       if (adminResult.status === 200 || autoReplyResult.status === 200) {
         setStatus({
           type: "success",
-          message: "Message sent successfully! Check your email for confirmation.",
+          message:
+            "Message sent successfully! Check your email for confirmation.",
         });
         setFormData({
           name: "",
