@@ -4,6 +4,7 @@ import { ArrowRight, Play, Zap } from "lucide-react";
 import { images } from "../assets/image-mapping";
 import Counter from "./Counter";
 import { optimizeCloudinaryUrl } from "../utils/image-optimizer";
+import { apiFetch } from "../utils/api";
 
 const Hero = () => {
   const containerRef = useRef(null);
@@ -35,7 +36,7 @@ const Hero = () => {
     // Fetch dynamic content
     const fetchContent = async () => {
       try {
-        const res = await fetch('/api/content/hero');
+        const res = await apiFetch('/api/content/hero');
         if (res.ok) {
           const data = await res.json();
           if (data && Object.keys(data).length > 0) {

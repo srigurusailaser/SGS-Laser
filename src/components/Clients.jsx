@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { optimizeCloudinaryUrl } from "../utils/image-optimizer";
+import { apiFetch } from "../utils/api";
 
 const Clients = () => {
   const [clients, setClients] = useState([]);
@@ -9,7 +10,7 @@ const Clients = () => {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const res = await fetch('/api/clients');
+        const res = await apiFetch('/api/clients');
         if (res.ok) {
           const data = await res.json();
           setClients(data);

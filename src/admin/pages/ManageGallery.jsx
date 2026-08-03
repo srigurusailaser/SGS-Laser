@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Loader2, Plus, Trash2, X, Image as ImageIcon } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { optimizeCloudinaryUrl } from '../../utils/image-optimizer';
+import { apiFetch } from '../../utils/api';
 
 const ManageGallery = () => {
   const [images, setImages] = useState([]);
@@ -24,7 +25,7 @@ const ManageGallery = () => {
 
   const fetchImages = async () => {
     try {
-      const res = await fetch('/api/gallery');
+      const res = await apiFetch('/api/gallery');
       if (res.ok) {
         const data = await res.json();
         setImages(data);
@@ -92,7 +93,7 @@ const ManageGallery = () => {
         data.append('images', file);
       });
       
-      const res = await fetch('/api/gallery', {
+      const res = await apiFetch('/api/gallery', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -124,7 +125,7 @@ const ManageGallery = () => {
     setIsDeleting(true);
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch(`/api/gallery/${deletingId}`, {
+      const res = await apiFetch(`/api/gallery/${deletingId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

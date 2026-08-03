@@ -1,4 +1,5 @@
 import React from "react";
+import { apiFetch } from "../utils/api";
 import { motion } from "framer-motion";
 import {
   Phone,
@@ -55,7 +56,7 @@ const Contact = () => {
     }
 
     try {
-      const res = await fetch("/api/email/contact", {
+      const res = await apiFetch("/api/email/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

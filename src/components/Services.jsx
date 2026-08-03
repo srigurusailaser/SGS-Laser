@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { images } from "../assets/image-mapping";
 import { optimizeCloudinaryUrl } from "../utils/image-optimizer";
+import { apiFetch } from "../utils/api";
 
 const Services = () => {
   const [showMore, setShowMore] = useState(false);
@@ -12,7 +13,7 @@ const Services = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const res = await fetch('/api/services');
+        const res = await apiFetch('/api/services');
         if (res.ok) {
           const data = await res.json();
           setServices(data);

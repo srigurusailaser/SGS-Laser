@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { images } from "../../assets/image-mapping";
 import { optimizeCloudinaryUrl } from "../../utils/image-optimizer";
 import { ArrowRight, ShieldCheck, Mail } from 'lucide-react';
+import { apiFetch } from '../../utils/api';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 
@@ -18,7 +19,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/auth/login/request', {
+      const res = await apiFetch('/api/auth/login/request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -44,7 +45,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/auth/login/verify', {
+      const res = await apiFetch('/api/auth/login/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp }),

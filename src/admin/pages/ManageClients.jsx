@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Loader2, Plus, Trash2, X, Users, Image as ImageIcon } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { optimizeCloudinaryUrl } from '../../utils/image-optimizer';
+import { apiFetch } from '../../utils/api';
 
 const ManageClients = () => {
   const [clients, setClients] = useState([]);
@@ -22,7 +23,7 @@ const ManageClients = () => {
 
   const fetchClients = async () => {
     try {
-      const res = await fetch('/api/clients');
+      const res = await apiFetch('/api/clients');
       if (res.ok) {
         const data = await res.json();
         setClients(data);
@@ -88,7 +89,7 @@ const ManageClients = () => {
         data.append('logos', file);
       });
       
-      const res = await fetch('/api/clients', {
+      const res = await apiFetch('/api/clients', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -118,7 +119,7 @@ const ManageClients = () => {
     setIsDeleting(true);
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch(`/api/clients/${deletingId}`, {
+      const res = await apiFetch(`/api/clients/${deletingId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

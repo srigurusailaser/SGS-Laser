@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Maximize2, Plus, Loader2 } from "lucide-react";
 import { optimizeCloudinaryUrl } from "../utils/image-optimizer";
+import { apiFetch } from "../utils/api";
 
 const Gallery = () => {
   const [activeTab, setActiveTab] = useState("products");
@@ -13,7 +14,7 @@ const Gallery = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const res = await fetch('/api/gallery');
+        const res = await apiFetch('/api/gallery');
         if (res.ok) {
           const data = await res.json();
           setImages(data);

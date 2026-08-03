@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Loader2, Plus, Edit2, Trash2, X, Image as ImageIcon, Layers } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { optimizeCloudinaryUrl } from '../../utils/image-optimizer';
+import { apiFetch } from '../../utils/api';
 
 const ManageServices = () => {
   const [services, setServices] = useState([]);
@@ -28,7 +29,7 @@ const ManageServices = () => {
 
   const fetchServices = async () => {
     try {
-      const res = await fetch('/api/services');
+      const res = await apiFetch('/api/services');
       if (res.ok) {
         const data = await res.json();
         setServices(data);
@@ -110,7 +111,7 @@ const ManageServices = () => {
       const url = editingId ? `/api/services/${editingId}` : '/api/services';
       const method = editingId ? 'PUT' : 'POST';
 
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method,
         headers: {
           'Authorization': `Bearer ${token}`
@@ -140,7 +141,7 @@ const ManageServices = () => {
     setIsDeleting(true);
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch(`/api/services/${deletingId}`, {
+      const res = await apiFetch(`/api/services/${deletingId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

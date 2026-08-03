@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Save, Loader2, Type } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { apiFetch } from '../../utils/api';
 
 const ManageHero = () => {
   const [loading, setLoading] = useState(true);
@@ -18,7 +19,7 @@ const ManageHero = () => {
 
   const fetchHeroData = async () => {
     try {
-      const res = await fetch('/api/content/hero');
+      const res = await apiFetch('/api/content/hero');
       if (res.ok) {
         const data = await res.json();
         if (data && Object.keys(data).length > 0) {
@@ -39,7 +40,7 @@ const ManageHero = () => {
     
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch('/api/content/hero', {
+      const res = await apiFetch('/api/content/hero', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
