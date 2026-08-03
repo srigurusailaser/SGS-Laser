@@ -20,9 +20,6 @@ const loginRequestOTP = async (req, res) => {
   }
 
   const otp = generateOTP();
-  console.log(`\n========================================`);
-  console.log(`🔑 ADMIN OTP: ${otp}`);
-  console.log(`========================================\n`);
   
   try {
     // Delete any existing OTPs for this email to prevent spam
