@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { images } from "../assets/image-mapping";
@@ -6,80 +6,28 @@ import { optimizeCloudinaryUrl } from "../utils/image-optimizer";
 
 const Services = () => {
   const [showMore, setShowMore] = useState(false);
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const initialServices = [
-    {
-      title: "Laser Cut House Name Plates",
-      description:
-        "Custom name plates made from high-quality acrylic, titanium, or stainless steel for Bengaluru homes and offices.",
-      image: images.cards.houseNamePlate,
-      category: "Laser",
-    },
-    {
-      title: "Industrial Rubber Stamps",
-      description:
-        "Personalized rubber stamps designed for clear, long-lasting impressions, perfect for corporate branding.",
-      image: images.cards.rubberStamp,
-      category: "Branding",
-    },
-    {
-      title: "Custom Fabric Banners",
-      description:
-        "High-quality fabric banners and signage laser cutting that are durable and ideal for promotions in Bengaluru.",
-      image: images.cards.fabricBanner,
-      category: "Printing",
-    },
-    {
-      title: "LED Acrylic Sign Boards",
-      description:
-        "Bright and durable LED sign boards using precision acrylic laser cutting to showcase your brand effectively.",
-      image: images.cards.ledSignBoard,
-      category: "Signage",
-    },
-    {
-      title: "High-Res Digital Prints",
-      description:
-        "Sharp, vibrant digital prints suited for posters, flyers, and premium industrial printing needs.",
-      image: images.cards.digitalPrinting,
-      category: "Printing",
-    },
-    {
-      title: "Custom Mug Printing",
-      description:
-        "Precision-printed mugs with your custom laser-inspired design or logo, perfect for corporate gifts.",
-      image: images.cards.mugPrinting,
-      category: "Gifts",
-    },
-  ];
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const res = await fetch('/api/services');
+        if (res.ok) {
+          const data = await res.json();
+          setServices(data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch services:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchServices();
+  }, []);
 
-  const additionalServices = [
-    {
-      title: "Precision Acrylic Cutting",
-      description:
-        "Expert acrylic laser cutting Bengaluru for custom shapes, industrial components, and creative designs.",
-      image: images.cards.acrylicCutting,
-      category: "Industrial",
-    },
-    {
-      title: "Premium Vinyl Stickers",
-      description:
-        "High-quality vinyl stickers for industrial branding, vehicle graphics, and Bengaluru-wide promotions.",
-      image: images.cards.vinylStickers,
-      category: "Branding",
-    },
-    {
-      title: "Corporate Trophy Engraving",
-      description:
-        "Professional laser engraving Bengaluru for trophies, awards, and personalized corporate recognition.",
-      image: images.cards.trophyEngraving,
-      category: "Laser",
-    },
-  ];
-
-  const allServices = [
-    ...initialServices,
-    ...(showMore ? additionalServices : []),
-  ];
+  // Determine which services to show
+  const visibleServices = showMore ? services : services.slice(0, 6);
 
   return (
     <section id="services" className="py-24 bg-[#F8F9FA] overflow-hidden">
@@ -121,9 +69,9 @@ const Services = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           <AnimatePresence>
-            {allServices.map((service, index) => (
+            {visibleServices.map((service, index) => (
               <motion.div
-                key={service.title}
+                key={service._id || service.title}
                 layout
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -159,7 +107,7 @@ const Services = () => {
           </AnimatePresence>
         </motion.div>
 
-        {!showMore && (
+        {!showMore && services.length > 6 && (
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}

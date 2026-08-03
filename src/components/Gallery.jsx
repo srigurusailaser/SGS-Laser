@@ -1,20 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Maximize2, Plus } from "lucide-react";
-import { images } from "../assets/image-mapping";
+import { Maximize2, Plus, Loader2 } from "lucide-react";
 import { optimizeCloudinaryUrl } from "../utils/image-optimizer";
 
 const Gallery = () => {
   const [activeTab, setActiveTab] = useState("products");
   const [selectedImage, setSelectedImage] = useState(null);
   const [showAll, setShowAll] = useState(false);
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const productImages = Object.values(images.works);
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const res = await fetch('/api/gallery');
+        if (res.ok) {
+          const data = await res.json();
+          setImages(data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch gallery:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchImages();
+  }, []);
 
-  const machineryImages = Object.values(images.machines);
-
-  const currentImages =
-    activeTab === "products" ? productImages : machineryImages;
+  const currentImages = images.filter((img) => img.category === activeTab);
   const visibleImages = showAll ? currentImages : currentImages.slice(0, 12);
 
   return (
@@ -71,32 +84,38 @@ const Gallery = () => {
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
         >
           <AnimatePresence mode="popLayout">
-            {visibleImages.map((img, index) => (
-              <motion.div
-                key={img}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4, delay: (index % 12) * 0.05 }}
-                onClick={() => setSelectedImage(img)}
-                className="group relative aspect-square overflow-hidden rounded-[32px] shadow-sm cursor-zoom-in bg-gray-50 border border-gray-100"
-              >
-                <img
-                  src={optimizeCloudinaryUrl(img, { width: 400, height: 400 })}
-                  alt={`Sri Guru Sai Laser ${activeTab} - Precision Laser Cutting Bengaluru project ${index + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                  width="400"
-                  height="400"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary transform scale-50 group-hover:scale-100 transition-transform duration-500">
-                    <Maximize2 size={20} />
+            {loading ? (
+              <div className="col-span-full flex justify-center py-12">
+                <Loader2 className="animate-spin text-primary" size={32} />
+              </div>
+            ) : (
+              visibleImages.map((img, index) => (
+                <motion.div
+                  key={img._id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4, delay: (index % 12) * 0.05 }}
+                  onClick={() => setSelectedImage(img.url)}
+                  className="group relative aspect-square overflow-hidden rounded-[32px] shadow-sm cursor-zoom-in bg-gray-50 border border-gray-100"
+                >
+                  <img
+                    src={optimizeCloudinaryUrl(img.url, { width: 400, height: 400 })}
+                    alt={`Sri Guru Sai Laser ${activeTab} - Precision Laser Cutting Bengaluru project ${index + 1}`}
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    width="400"
+                    height="400"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary transform scale-50 group-hover:scale-100 transition-transform duration-500">
+                      <Maximize2 size={20} />
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))
+            )}
           </AnimatePresence>
         </motion.div>
 

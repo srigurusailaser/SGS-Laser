@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { images } from "../assets/image-mapping";
 import { optimizeCloudinaryUrl } from "../utils/image-optimizer";
 
 const Clients = () => {
-  const clients = Object.values(images.clients);
+  const [clients, setClients] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Double for seamless marquee
-  const marqueeLogos = [...clients, ...clients, ...clients];
+  useEffect(() => {
+    const fetchClients = async () => {
+      try {
+        const res = await fetch('/api/clients');
+        if (res.ok) {
+          const data = await res.json();
+          setClients(data);
+        }
+      } catch (error) {
+        console.error('Error fetching clients:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchClients();
+  }, []);
+
+  if (loading || clients.length === 0) {
+    return null;
+  }
+
+  // If there are 4 or fewer clients, display them statically and centered (no duplication)
+  const isStatic = clients.length <= 4;
+
+  // Duplicate logos array exactly once to guarantee smooth seamless marquee animation
+  const marqueeLogos = [...clients, ...clients];
 
   return (
     <section className="py-20 bg-white border-y border-gray-100 overflow-hidden">
@@ -22,28 +46,52 @@ const Clients = () => {
         </motion.h2>
       </div>
 
-      <div className="flex h-[80px] md:h-[100px] items-center whitespace-nowrap overflow-hidden">
-        <motion.div
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 20, ease: "linear", repeat: Infinity }}
-          className="flex items-center gap-12 md:gap-16 px-8"
-        >
-          {marqueeLogos.map((logo, index) => (
-            <div
-              key={index}
+      {isStatic ? (
+        // Static Centered Display (no repetitions)
+        <div className="flex justify-center items-center gap-12 md:gap-16 px-8 flex-wrap">
+          {clients.map((client) => (
+            <motion.div
+              key={client._id}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               className="flex-shrink-0 hover:grayscale-0 transition-all duration-500"
             >
               <img
-                src={optimizeCloudinaryUrl(logo, { height: 64, crop: 'limit' })}
-                alt={`Client Logo`}
-                className="h-12 md:h-16 w-auto object-contain"
+                src={optimizeCloudinaryUrl(client.logoUrl, { height: 64, crop: 'limit' })}
+                alt={client.name || `Client Logo`}
+                className="h-12 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300"
                 height="64"
                 loading="lazy"
               />
-            </div>
+            </motion.div>
           ))}
-        </motion.div>
-      </div>
+        </div>
+      ) : (
+        // Infinite Marquee Display (with increased speed - 15 seconds)
+        <div className="flex h-[80px] md:h-[100px] items-center whitespace-nowrap overflow-hidden">
+          <motion.div
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 15, ease: "linear", repeat: Infinity }}
+            className="flex items-center gap-12 md:gap-16 px-8"
+          >
+            {marqueeLogos.map((client, index) => (
+              <div
+                key={client._id ? `${client._id}-${index}` : index}
+                className="flex-shrink-0 hover:grayscale-0 transition-all duration-500"
+              >
+                <img
+                  src={optimizeCloudinaryUrl(client.logoUrl, { height: 64, crop: 'limit' })}
+                  alt={client.name || `Client Logo`}
+                  className="h-12 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300"
+                  height="64"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      )}
     </section>
   );
 };

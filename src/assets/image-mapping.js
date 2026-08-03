@@ -38,20 +38,7 @@ export const images = {
     plotter:
       "https://res.cloudinary.com/djdfmvg6b/image/upload/v1769870801/plotter_machine_wcyecc.png",
   },
-  clients: {
-    logo1:
-      "https://res.cloudinary.com/djdfmvg6b/image/upload/v1769870805/LOGO1_kzc6e5.jpg",
-    logo2:
-      "https://res.cloudinary.com/djdfmvg6b/image/upload/v1769870805/LOGO5_zjlknu.png",
-    logo3:
-      "https://res.cloudinary.com/djdfmvg6b/image/upload/v1769870806/LOGO2_oqnrx7.jpg",
-    logo4:
-      "https://res.cloudinary.com/djdfmvg6b/image/upload/v1769870806/LOGO3_o9rwy8.png",
-    logo5:
-      "https://res.cloudinary.com/djdfmvg6b/image/upload/v1769870806/LOGO4_ktaxcp.png",
-    logo6:
-      "https://res.cloudinary.com/djdfmvg6b/image/upload/v1769870806/LOGO6_ayihj6.png",
-  },
+
   works: {
     p1: "https://res.cloudinary.com/djdfmvg6b/image/upload/v1769871656/IMG20251124221008_mkal2m.jpg",
     p2: "https://res.cloudinary.com/djdfmvg6b/image/upload/v1769871651/IMG20251102210039_lppsj5.jpg",

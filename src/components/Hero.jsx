@@ -12,6 +12,11 @@ const Hero = () => {
   const y2 = useTransform(scrollY, [0, 500], [0, -150]);
 
   const [randomImages, setRandomImages] = useState([]);
+  const [content, setContent] = useState({
+    title: 'High Precision\nLaser\nCutting',
+    subtitle: 'Sri Guru Sai Laser provides top-tier CNC laser cutting Bengaluru, metal fabrication, and stainless steel laser cutting. We transform your concepts into high-precision masterpieces using advanced industrial laser technology.',
+    buttonText: 'Start Project',
+  });
 
   const allAssets = [
     images.cards.houseNamePlate,
@@ -26,6 +31,22 @@ const Hero = () => {
     // Pick 4 random images
     const shuffled = [...allAssets].sort(() => 0.5 - Math.random());
     setRandomImages(shuffled.slice(0, 4));
+
+    // Fetch dynamic content
+    const fetchContent = async () => {
+      try {
+        const res = await fetch('/api/content/hero');
+        if (res.ok) {
+          const data = await res.json();
+          if (data && Object.keys(data).length > 0) {
+            setContent(data);
+          }
+        }
+      } catch (err) {
+        console.error('Failed to fetch hero content:', err);
+      }
+    };
+    fetchContent();
   }, []);
 
   if (randomImages.length === 0) return null;
@@ -63,44 +84,51 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[42px] md:text-[72px] lg:text-[84px] font-[900] text-primary leading-[1] mb-8 tracking-tighter"
+            className="text-[42px] md:text-[72px] lg:text-[84px] font-[900] text-primary leading-[1] mb-8 tracking-tighter whitespace-pre-line"
           >
-            High Precision <br />
-            <motion.span
-              animate={{
-                opacity: [1, 0.6, 1],
-                textShadow: [
-                  "0 0 10px rgba(217,125,69,0.3)",
-                  "0 0 25px rgba(217,125,69,0.6)",
-                  "0 0 10px rgba(217,125,69,0.3)",
-                ],
-                color: ["#D97D45", "#FF8C42", "#D97D45"],
-              }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="italic relative inline-block"
-            >
-              Laser
-            </motion.span>
-            <br />
-            Cutting
+            {content.title.split('\n').map((line, index, arr) => {
+              if (index === 1 && line.trim().toLowerCase() === 'laser') {
+                return (
+                  <React.Fragment key={index}>
+                    <motion.span
+                      animate={{
+                        opacity: [1, 0.6, 1],
+                        textShadow: [
+                          "0 0 10px rgba(217,125,69,0.3)",
+                          "0 0 25px rgba(217,125,69,0.6)",
+                          "0 0 10px rgba(217,125,69,0.3)",
+                        ],
+                        color: ["#D97D45", "#FF8C42", "#D97D45"],
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="italic relative inline-block"
+                    >
+                      {line}
+                    </motion.span>
+                    {index < arr.length - 1 && <br />}
+                  </React.Fragment>
+                );
+              }
+              return (
+                <React.Fragment key={index}>
+                  {line}
+                  {index < arr.length - 1 && <br />}
+                </React.Fragment>
+              );
+            })}
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="text-lg md:text-xl font-medium text-lightText/80 leading-relaxed mb-10 max-w-[600px] mx-auto lg:mx-0"
+            className="text-lg md:text-xl font-medium text-lightText/80 leading-relaxed mb-10 max-w-[600px] mx-auto lg:mx-0 whitespace-pre-line"
           >
-            Sri Guru Sai Laser provides top-tier{" "}
-            <strong>CNC laser cutting Bengaluru</strong>,{" "}
-            <strong>metal fabrication</strong>, and{" "}
-            <strong>stainless steel laser cutting</strong>. We transform your
-            concepts into high-precision masterpieces using advanced industrial
-            laser technology.
+            {content.subtitle}
           </motion.p>
 
           <motion.div
@@ -113,7 +141,7 @@ const Hero = () => {
               href="#contact"
               className="group bg-primary text-white px-10 py-5 rounded-2xl font-black text-lg shadow-[0_20px_40px_rgba(83,28,179,0.3)] hover:shadow-[0_25px_50px_rgba(83,28,179,0.4)] hover:-translate-y-1 transition-all flex items-center gap-3"
             >
-              Start Project{" "}
+              {content.buttonText}{" "}
               <ArrowRight
                 size={20}
                 className="group-hover:translate-x-1 transition-transform"

@@ -204,7 +204,8 @@ const Footer = () => {
         className="max-w-[1200px] mx-auto px-4 mt-20 pt-8 border-t border-white/5 flex flex-col items-center justify-center gap-4 text-gray-400 text-sm"
       >
         <p>&copy; {currentYear} Sri Guru Sai Laser. All rights reserved.</p>
-        <div className="flex items-center gap-3 grayscale hover:grayscale-0 transition-all duration-300">
+        <a href="https://www.cortexit.in" target="_blank" rel="noopener noreferrer">
+          <div className="flex items-center gap-3 cursor-pointer group  grayscale hover:grayscale-0 hover:opacity-[100%]  transition-all duration-300">
           <span className="text-xs uppercase tracking-tighter text-gray-200">
             Designed and developed by
           </span>
@@ -215,10 +216,11 @@ const Footer = () => {
               className="h-6 w-auto"
             />
             <span className="font-black tracking-tighter text-white">
-              CORTEX™ IT
+              CORTEX™
             </span>
           </div>
         </div>
+        </a>
       </motion.div>
     </footer>
   );

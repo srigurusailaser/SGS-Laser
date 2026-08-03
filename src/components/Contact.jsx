@@ -9,10 +9,6 @@ import {
   Send,
   ArrowRight,
 } from "lucide-react";
-import emailjs from "@emailjs/browser";
-
-// Initialize EmailJS early for faster response on click
-emailjs.init("Pboj02MavnbED_jGw");
 
 const Contact = () => {
   const [formData, setFormData] = React.useState({
@@ -59,33 +55,24 @@ const Contact = () => {
     }
 
     try {
-      const templateParams = {
-        user_email: formData.email,
-        message: formData.message,
-        name: formData.name,
-        phone: formData.phone,
-        service: formData.service,
-      };
+      const res = await fetch("/api/email/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          message: formData.message,
+        }),
+      });
 
-      // Send both admin inquiry and auto-reply simultaneously for better performance
-      const [adminResult, autoReplyResult] = await Promise.all([
-        emailjs.send(
-          "service_oxy7n08",
-          "template_m49l2ga", // ADMIN_TEMPLATE_ID
-          templateParams,
-        ),
-        emailjs.send(
-          "service_oxy7n08",
-          "template_dqrwz08", // AUTO_REPLY_TEMPLATE_ID
-          templateParams, //error fixed
-        ),
-      ]);
-
-      if (adminResult.status === 200 || autoReplyResult.status === 200) {
+      if (res.ok) {
         setStatus({
           type: "success",
-          message:
-            "Message sent successfully! Check your email for confirmation.",
+          message: "Message sent successfully! We will get back to you soon.",
         });
         setFormData({
           name: "",
@@ -94,6 +81,8 @@ const Contact = () => {
           service: "",
           message: "",
         });
+      } else {
+        throw new Error("Failed to send message");
       }
     } catch (error) {
       setStatus({
